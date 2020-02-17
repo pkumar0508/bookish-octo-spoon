@@ -1,16 +1,20 @@
 name: Test drive Github Actions
-# This workflow is triggered on pushes to the repository.
 on: [push]
 
 jobs:
   build:
-    # Job name is Greeting
     name: Greeting
-    # This job runs on Linux
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout bookish-octo-spoon
         uses: actions/checkout@v2
+        with:
+          path: bookish-octo-spoon
+      - name: Checkout fictional-octo-eureka
+        uses: actions/checkout@v2
+        with:
+          repository: pkumar0508/fictional-octo-eureka
+          path: bookish-octo-spoon
       - name: Explore
         uses: docker://alpine:3
         with:
