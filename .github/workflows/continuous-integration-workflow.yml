@@ -20,3 +20,5 @@ jobs:
         with:
           entrypoint: /bin/sh
           args: -c "apk add --no-cache tree && tree"
+      - name: Generate new file
+        run: sha256sum bookish-octo-spoon/panda > fictional-octo-eureka/forever
