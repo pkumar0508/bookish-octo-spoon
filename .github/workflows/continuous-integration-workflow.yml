@@ -14,5 +14,5 @@ jobs:
       - name: Explore
         uses: docker://alpine:3
         with:
-          entrypoint: /bin/bash
-          args: tree
+          entrypoint: /bin/sh
+          args: -c "apk add --no-cache tree && tree"
