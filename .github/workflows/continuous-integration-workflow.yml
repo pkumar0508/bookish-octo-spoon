@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: pkumar0508/fictional-octo-eureka
-          path: bookish-octo-spoon
+          path: fictional-octo-eureka
       - name: Explore
         uses: docker://alpine:3
         with:
