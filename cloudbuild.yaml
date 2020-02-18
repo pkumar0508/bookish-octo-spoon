@@ -7,7 +7,6 @@ steps:
   - |
     git clone https://pkumar0508@github.com/pkumar0508/fictional-octo-eureka.git && \
     cd fictional-octo-eureka && \
-    git config user.name "Automation" && \
     git config user.email pkumar0508@gmail.com
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Generate manifest
@@ -18,12 +17,12 @@ steps:
      sha256sum README.md > fictional-octo-eureka/output.txt
 - name: 'gcr.io/cloud-builders/gcloud'
   id: Push manifest
-  entrypoint: /bin/bash
+  entrypoint: /bin/sh
   args:
   - '-c'
   - |
     set -x && \
-    echo -e "#!/bin/bash\ngcloud beta secrets versions access 2 --secret=GITHUB_PAT" > /tmp/secret.sh && \
+    printf '#!/bin/bash\ngcloud beta secrets versions access 2 --secret=GITHUB_PAT' > /tmp/secret.sh && \
     chmod +x /tmp/secret.sh && \
     cat /tmp/secret.sh && \
     cd fictional-octo-eureka && \
