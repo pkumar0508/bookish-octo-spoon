@@ -23,6 +23,9 @@ steps:
   - '-c'
   - |
     set -x && \
+    GIT_ASKPASS=$(mktemp) && \
+    echo -e '#!/bin/sh\ngcloud beta secrets versions access 2 --secret="GITHUB_PAT"\n' > $GIT_ASKPASS && \
+    chmod +x $GIT_ASKPASS && \
     cd fictional-octo-eureka && \
     git add output.txt && \
     git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
