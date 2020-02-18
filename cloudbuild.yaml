@@ -31,3 +31,5 @@ steps:
     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
     git push origin master
+  env:
+  - 'GIT_ASKPASS=/tmp/secret.sh'
