@@ -23,7 +23,6 @@ steps:
   - |
     set -x && \
     printf '#!/bin/bash\ngcloud beta secrets versions access 2 --secret=GITHUB_PAT' > /tmp/secret.sh && \
-    chmod +x /tmp/secret.sh && \
     cat /tmp/secret.sh && \
     cd fictional-octo-eureka && \
     git add output.txt && \
