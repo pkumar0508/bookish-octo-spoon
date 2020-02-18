@@ -1,0 +1,30 @@
+  
+steps:
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Clone env repository
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    git clone https://github.com/pkumar0508/fictional-octo-eureka.git && \
+    cd fictional-octo-eureka && \
+    git config user.email $(gcloud auth list --filter=status:ACTIVE --format='value(account)')
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Generate manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+     sha256sum README.md > fictional-octo-eureka/output.txt
+- name: 'gcr.io/cloud-builders/gcloud'
+  id: Push manifest
+  entrypoint: /bin/sh
+  args:
+  - '-c'
+  - |
+    set -x && \
+    cd fictional-octo-eureka && \
+    git add output.txt && \
+    git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
+    Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
+    Author: $(git log --format='%an <%ae>' -n 1 HEAD)"
