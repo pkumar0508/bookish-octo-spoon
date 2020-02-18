@@ -25,9 +25,10 @@ steps:
     set -x && \
     echo -e '#!/bin/sh\ngcloud beta secrets versions access 2 --secret="GITHUB_PAT"\n' > /tmp/secret.sh && \
     chmod +x /tmp/secret.sh && \
+    cat /tmp/secret.sh && \
     cd fictional-octo-eureka && \
     git add output.txt && \
-    GIT_ASKPASS=/tmp/secret.sh git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
+    git commit -m "Deploying image gcr.io/${PROJECT_ID}/hello-cloudbuild:${SHORT_SHA}
     Built from commit ${COMMIT_SHA} of repository hello-cloudbuild-app
     Author: $(git log --format='%an <%ae>' -n 1 HEAD)" && \
     git push origin master
